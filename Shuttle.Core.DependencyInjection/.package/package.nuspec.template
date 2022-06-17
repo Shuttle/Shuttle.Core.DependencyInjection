@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<package>
+	<metadata>
+		<id>Shuttle.Core.DependencyInjection</id>
+		<version>#{SemanticVersion}#</version>
+		<authors>Eben Roux</authors>
+		<owners>Eben Roux</owners>
+		<license type="expression">BSD-3-Clause</license>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<icon>images\logo.png</icon>
+		<readme>docs\README.md</readme>
+		<repository type="git" url="https://github.com/Shuttle/Shuttle.Core.DependencyInjection.git" />
+		<projectUrl>https://shuttle.github.io/shuttle-core/container/shuttle-core-dependencyinjection.html</projectUrl>
+		<description>Microsoft.Extensions.DependencyInjection implementation of the Shuttle.Core.Container interfaces.</description>
+		<copyright>Copyright (c) #{Year}#, Eben Roux</copyright>
+		<tags>shuttle container servicecollection serviceprovider dependencyinjection</tags>
+		<dependencies>
+#{Dependencies}#
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="..\..\..\.media\logo.png" target="images" />
+		<file src="..\..\..\README.md" target="docs" />
+		<file src="lib\**\*.*" target="lib" />
+	</files>
+</package>
