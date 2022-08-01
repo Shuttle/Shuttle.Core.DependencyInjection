@@ -1,19 +1,63 @@
 # Shuttle.Core.DependencyInjection
 
 ```
-PM> Install-Package ShuttleShuttle.Core.DependencyInjection
+PM> Install-Package Shuttle.Core.DependencyInjection
 ```
 
-The `NinjectComponentContainer` implements both the `IComponentRegistry` and `IComponentResolver` interfaces.  
+Add components to `IServiceCollection` by convention:
 
 ```c#
 IServiceCollection services = new ServiceCollection();
 
-var registry = new ServiceCollectionComponentRegistry(services);
-
-// register all dependencies
-
-var resolver = new ServiceProviderComponentResolver(services.BuildServiceProvider());
+services
+	.FromAssembly(assembly)
+	.Add();
 ```
 
-However, in a typical `dotnet` application one would make use of the [dependency injection](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection) instances that are available.
+The above would be the simplest case and add all types using either a matching interface (with the same name as the class prefixed with `I`) or the first interface found.  The default service lifetime is `Singleton`.
+
+In order to filter the types add a `Filter` function:
+
+```c#
+IServiceCollection services = new ServiceCollection();
+
+services
+	.FromAssembly(assembly)
+	.Filter(type => type.Name.Equals("FilteredType", StringComparison.InvariantCultureIgnoreCase))
+	.Add();
+```
+
+If a particular interface should be used for a selected type it may be specified as follows:
+
+```c#
+IServiceCollection services = new ServiceCollection();
+
+services
+	.FromAssembly(assembly)
+	.GetServiceType(type => typeof(ISomeInterface))
+	.Add();
+```
+
+The service lifetime may also be specified:
+
+```c#
+IServiceCollection services = new ServiceCollection();
+
+services
+	.FromAssembly(assembly)
+	.GetServiceLifetime(type => ServiceLifetime.Transient)
+	.Add();
+```
+
+Since this is a builder interface all the bits may be used in combination:
+
+```c#
+IServiceCollection services = new ServiceCollection();
+
+services
+	.FromAssembly(assembly)
+	.Filter(type => type.Name.Equals("FilteredType", StringComparison.InvariantCultureIgnoreCase))
+	.GetServiceType(type => typeof(ISomeInterface))
+	.GetServiceLifetime(type => ServiceLifetime.Transient)
+	.Add();
+```

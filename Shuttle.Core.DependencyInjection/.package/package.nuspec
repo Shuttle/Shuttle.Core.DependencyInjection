@@ -3,7 +3,7 @@
 <package>
 	<metadata>
 		<id>Shuttle.Core.DependencyInjection</id>
-		<version>#{SemanticVersion}#</version>
+		<version>1.0.0</version>
 		<authors>Eben Roux</authors>
 		<owners>Eben Roux</owners>
 		<license type="expression">BSD-3-Clause</license>
@@ -12,11 +12,12 @@
 		<readme>docs\README.md</readme>
 		<repository type="git" url="https://github.com/Shuttle/Shuttle.Core.DependencyInjection.git" />
 		<projectUrl>https://shuttle.github.io/shuttle-core/container/shuttle-core-dependencyinjection.html</projectUrl>
-		<description>Add components to `IServiceCollection` by convention.</description>
-		<copyright>Copyright (c) #{Year}#, Eben Roux</copyright>
-		<tags>servicecollection dependencyinjection</tags>
+		<description>Microsoft.Extensions.DependencyInjection implementation of the Shuttle.Core.Container interfaces.</description>
+		<copyright>Copyright (c) 2022, Eben Roux</copyright>
+		<tags>shuttle container servicecollection serviceprovider dependencyinjection</tags>
 		<dependencies>
-#{Dependencies}#
+      <dependency id="Microsoft.Extensions.DependencyInjection" version="6.0.0" />
+      <dependency id="Shuttle.Core.Container" version="12.0.1" />
 		</dependencies>
 	</metadata>
 	<files>
