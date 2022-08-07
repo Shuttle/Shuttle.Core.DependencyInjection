@@ -14,7 +14,7 @@ services
 	.Add();
 ```
 
-The above would be the simplest case and add all types using either a matching interface (with the same name as the class prefixed with `I`) or the first interface found.  The default service lifetime is `Singleton`.
+The above would be the simplest case and adds all types using either a matching interface (with the same name as the class prefixed with `I`) or the first interface found.  The default service lifetime is `Singleton`.
 
 In order to filter the types add a `Filter` function:
 
