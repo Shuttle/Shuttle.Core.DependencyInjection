@@ -28,36 +28,27 @@ namespace Shuttle.Core.DependencyInjection
 
         public ServiceDescriptorBuilder(IServiceCollection services, Assembly assembly)
         {
-            Guard.AgainstNull(services, nameof(services));
-            Guard.AgainstNull(assembly, nameof(assembly));
-
-            _services = services;
-            _assembly = assembly;
+            _services = Guard.AgainstNull(services, nameof(services));
+            _assembly = Guard.AgainstNull(assembly, nameof(assembly));
         }
 
-        public ServiceDescriptorBuilder Filter(Func<Type, bool> func)
+        public ServiceDescriptorBuilder Filter(Func<Type, bool> filter)
         {
-            Guard.AgainstNull(func, nameof(func));
-
-            _filter = func;
+            _filter = Guard.AgainstNull(filter, nameof(filter));
 
             return this;
         }
 
-        public ServiceDescriptorBuilder GetServiceType(Func<Type, Type> func)
+        public ServiceDescriptorBuilder GetServiceType(Func<Type, Type> getServiceType)
         {
-            Guard.AgainstNull(func, nameof(func));
-
-            _getServiceType = func;
+            _getServiceType = Guard.AgainstNull(getServiceType, nameof(getServiceType));
 
             return this;
         }
 
-        public ServiceDescriptorBuilder GetServiceLifetime(Func<Type, ServiceLifetime> func)
+        public ServiceDescriptorBuilder GetServiceLifetime(Func<Type, ServiceLifetime> getServiceLifetime)
         {
-            Guard.AgainstNull(func, nameof(func));
-
-            _getServiceLifetime = func;
+            _getServiceLifetime = Guard.AgainstNull(getServiceLifetime, nameof(getServiceLifetime));
 
             return this;
         }
@@ -78,8 +69,7 @@ namespace Shuttle.Core.DependencyInjection
                     continue;
                 }
 
-                _services.Add(new ServiceDescriptor(serviceType, type,
-                    serviceLifetime.HasValue ? serviceLifetime.Value : _getServiceLifetime.Invoke(type)));
+                _services.Add(new ServiceDescriptor(serviceType, type, serviceLifetime ?? _getServiceLifetime.Invoke(type)));
             }
 
             return _services;
