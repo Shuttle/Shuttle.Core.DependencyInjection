@@ -13,11 +13,12 @@
 		<repository type="git" url="https://github.com/Shuttle/Shuttle.Core.DependencyInjection.git" />
 		<projectUrl>https://shuttle.github.io/shuttle-core/container/shuttle-core-dependencyinjection.html</projectUrl>
 		<description>Add components to `IServiceCollection` by convention.</description>
-		<copyright>Copyright (c) 2022, Eben Roux</copyright>
+		<copyright>Copyright (c) 2024, Eben Roux</copyright>
 		<tags>servicecollection dependencyinjection</tags>
 		<dependencies>
       <dependency id="Microsoft.Extensions.DependencyInjection" version="7.0.0" />
-      <dependency id="Shuttle.Core.Contract" version="11.0.0" />
+      <dependency id="Shuttle.Core.Contract" version="11.1.0" />
+      <dependency id="Shuttle.Core.Reflection" version="13.0.0" />
 		</dependencies>
 	</metadata>
 	<files>
