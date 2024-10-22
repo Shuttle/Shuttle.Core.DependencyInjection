@@ -7,7 +7,7 @@ namespace Shuttle.Core.DependencyInjection
     {
         public static ServiceDescriptorBuilder FromAssembly(this IServiceCollection services, Assembly assembly)
         {
-            return new ServiceDescriptorBuilder(services, assembly);
+            return new(services, assembly);
         }
     }
 }
