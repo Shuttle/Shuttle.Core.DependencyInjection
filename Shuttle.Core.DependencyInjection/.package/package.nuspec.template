@@ -11,7 +11,7 @@
 		<icon>images\logo.png</icon>
 		<readme>docs\README.md</readme>
 		<repository type="git" url="https://github.com/Shuttle/Shuttle.Core.DependencyInjection.git" />
-		<projectUrl>https://shuttle.github.io/shuttle-core/container/shuttle-core-dependencyinjection.html</projectUrl>
+		<projectUrl>https://www.pendel.co.za/shuttle-core/infrastructure/shuttle-core-dependencyinjection.html</projectUrl>
 		<description>Add components to `IServiceCollection` by convention.</description>
 		<copyright>Copyright (c) #{Year}#, Eben Roux</copyright>
 		<tags>servicecollection dependencyinjection</tags>
