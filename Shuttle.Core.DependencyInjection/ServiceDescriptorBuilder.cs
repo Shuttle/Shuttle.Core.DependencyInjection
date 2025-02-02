@@ -10,13 +10,13 @@ namespace Shuttle.Core.DependencyInjection
     {
         private readonly Assembly _assembly;
         private readonly IServiceCollection _services;
-        private Func<Type, bool> _filter = type => true;
+        private Func<Type, bool> _filter = _ => true;
 
         private Func<Type, ServiceLifetime> _getServiceLifetime = type => ServiceLifetime.Singleton;
 
-        private Func<Type, Type> _getServiceType = type =>
+        private Func<Type, Type?> _getServiceType = type =>
         {
-            var interfaces = type.GetInterfaces();
+            var interfaces = Guard.AgainstNull(type).GetInterfaces();
 
             if (interfaces.Length == 0)
             {
@@ -28,27 +28,27 @@ namespace Shuttle.Core.DependencyInjection
 
         public ServiceDescriptorBuilder(IServiceCollection services, Assembly assembly)
         {
-            _services = Guard.AgainstNull(services, nameof(services));
-            _assembly = Guard.AgainstNull(assembly, nameof(assembly));
+            _services = Guard.AgainstNull(services);
+            _assembly = Guard.AgainstNull(assembly);
         }
 
         public ServiceDescriptorBuilder Filter(Func<Type, bool> filter)
         {
-            _filter = Guard.AgainstNull(filter, nameof(filter));
+            _filter = Guard.AgainstNull(filter);
 
             return this;
         }
 
         public ServiceDescriptorBuilder GetServiceType(Func<Type, Type> getServiceType)
         {
-            _getServiceType = Guard.AgainstNull(getServiceType, nameof(getServiceType));
+            _getServiceType = Guard.AgainstNull(getServiceType);
 
             return this;
         }
 
         public ServiceDescriptorBuilder GetServiceLifetime(Func<Type, ServiceLifetime> getServiceLifetime)
         {
-            _getServiceLifetime = Guard.AgainstNull(getServiceLifetime, nameof(getServiceLifetime));
+            _getServiceLifetime = Guard.AgainstNull(getServiceLifetime);
 
             return this;
         }
@@ -69,7 +69,7 @@ namespace Shuttle.Core.DependencyInjection
                     continue;
                 }
 
-                _services.Add(new ServiceDescriptor(serviceType, type, serviceLifetime ?? _getServiceLifetime.Invoke(type)));
+                _services.Add(new(serviceType, type, serviceLifetime ?? _getServiceLifetime.Invoke(type)));
             }
 
             return _services;
